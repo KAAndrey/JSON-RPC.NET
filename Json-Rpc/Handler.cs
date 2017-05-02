@@ -210,15 +210,8 @@
                 return PostProcess(Rpc, response, RpcContext);
             }
 
-            SMDService metadata = null;
-            Delegate handle = null;
-            var haveMetadata = this.MetaData.Services.TryGetValue(Rpc.Method, out metadata);
-            if (haveMetadata)
-            {
-                handle = metadata.dele; 
-            }
-
-            if (haveMetadata == false || metadata == null)
+            SMDService metadata;
+            if (!MetaData.Services.TryGetValue(Rpc.Method, out metadata))
             {
                 JsonResponse response = new JsonResponse()
                 {
@@ -229,6 +222,7 @@
                 return PostProcess(Rpc, response, RpcContext);
             }
 
+            var handle = metadata.dele;
             bool isJObject = Rpc.Params is Newtonsoft.Json.Linq.JObject;
             bool isJArray = Rpc.Params is Newtonsoft.Json.Linq.JArray;
             object[] parameters = null;
