@@ -1915,7 +1915,7 @@ namespace AustinHarris.JsonRpcTestN
             if (expectedJson is JObject)
             {
                 AssertJsonAreEqual((JObject)expectedJson, (JObject)actualJson, path);
-            } else if (expectedJson is JArray)
+            } else if (expectedJson is JObject)
             {
                 AssertJsonAreEqual((JArray)expectedJson, (JArray)actualJson, path);
             } else if (expectedJson is JValue)
